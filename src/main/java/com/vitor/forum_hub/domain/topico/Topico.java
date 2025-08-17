@@ -1,5 +1,6 @@
 package com.vitor.forum_hub.domain.topico;
 
+import com.vitor.forum_hub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,17 +15,26 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Topico {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String titulo;
     private String mensagem;
+    @Column(name = "nomecurso")
     private String nomeCurso;
+    private String autor;
+    @Column(name = "datacriacao")
     private LocalDateTime dataCriacao;
 
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
-//    @Embedded
-//    private Usuario autor;
-
+    public Topico(DadosCadastroTopico dados) {
+        this.titulo = dados.titulo();
+        this.mensagem = dados.mensagem();
+        this.nomeCurso = dados.nomeCurso();
+        this.autor = dados.autor();
+        this.dataCriacao = LocalDateTime.now();
+        this.estado = Estado.NAO_RESPONDIDO;
+    }
 }
