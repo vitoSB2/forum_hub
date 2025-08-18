@@ -1,6 +1,5 @@
 package com.vitor.forum_hub.domain.topico;
 
-import com.vitor.forum_hub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
